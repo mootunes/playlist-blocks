@@ -53,31 +53,13 @@ function mootunes_audio_playlist_block() {
       ) )
       ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
         //Set Track List
-        if ( $fields['mootunes_audio_playlist_block_tracks'] ) {
-          $track_list = 'ids=\'' . implode( ',', $fields['mootunes_audio_playlist_block_tracks'] ) . '\' ';
-        } else {
-          $track_list = '';
-        }
-        //Set Order
-        if ( $fields['mootunes_audio_playlist_order'] == 'rand' ) {
-          $order = 'orderby=\'rand\' ';
-        } elseif ( $fields['mootunes_audio_playlist_order'] ) {
-          $order = 'order=\'' . $fields['mootunes_audio_playlist_order'] . '\' ';
-        } else {
-          $order = '';
-        }
-        //Set Style
-        if ( $fields['mootunes_audio_playlist_style'] ) {
-          $style = 'style=\'' .  $fields['mootunes_audio_playlist_style'] . '\' ';
-        } else {
-          $style = '';
-        }
-        //Set Hide
-        $hide = '';
-        if ($fields['mootunes_audio_playlist_hide']) { foreach( $fields['mootunes_audio_playlist_hide'] as $hidden ) {
-            $hide = $hide . $hidden . '=\'false\' ';
-        } }
-        echo do_shortcode("[playlist " . $track_list . $order . $style . $hide . "]");
+        $args = array();
+        if ( $fields['mootunes_audio_playlist_block_tracks'] ) $args['ids'] = $fields['mootunes_audio_playlist_block_tracks']; // Set Tracks
+        if ( $fields['mootunes_audio_playlist_order'] == 'rand' ) { $args['orderby'] = 'rand'; } //Set Order to Random
+        elseif ( $fields['mootunes_audio_playlist_order'] ) { $args['order'] = $fields['mootunes_audio_playlist_order']; } //Otherwise set the order
+        if ( $fields['mootunes_audio_playlist_style'] ) $args['style'] = $fields['mootunes_audio_playlist_style'];
+        if ($fields['mootunes_audio_playlist_hide']) { foreach( $fields['mootunes_audio_playlist_hide'] as $hidden ) { $args[$hidden] = false; } }
+        echo wp_playlist_shortcode( $args );
       } );
 }
 
@@ -110,31 +92,12 @@ function mootunes_video_playlist_block() {
           ) )
       ) )
       ->set_render_callback( function ( $fields, $attributes, $inner_blocks ) {
-        //Set Track List
-        if ( $fields['mootunes_video_playlist_block_tracks'] ) {
-          $track_list = 'ids=\'' . implode( ',', $fields['mootunes_video_playlist_block_tracks'] ) . '\' ';
-        } else {
-          $track_list = '';
-        }
-        //Set Order
-        if ( $fields['mootunes_video_playlist_order'] == 'rand' ) {
-          $order = 'orderby=\'rand\' ';
-        } elseif ( $fields['mootunes_video_playlist_order'] ) {
-          $order = 'order=\'' . $fields['mootunes_video_playlist_order'] . '\' ';
-        } else {
-          $order = '';
-        }
-        //Set Style
-        if ( $fields['mootunes_video_playlist_style'] ) {
-          $style = 'style=\'' .  $fields['mootunes_video_playlist_style'] . '\' ';
-        } else {
-          $style = '';
-        }
-        //Set Hide
-        $hide = '';
-        if ($fields['mootunes_video_playlist_hide']) { foreach( $fields['mootunes_video_playlist_hide'] as $hidden ) {
-            $hide = $hide . $hidden . '=\'false\' ';
-        } }
-        echo do_shortcode("[playlist type='video' " . $track_list . $order . $style . $hide . "]");
+        $args = array( 'type' => 'video' );
+        if ( $fields['mootunes_video_playlist_block_tracks'] ) $args['ids'] = $fields['mootunes_video_playlist_block_tracks']; // Set Tracks
+        if ( $fields['mootunes_video_playlist_order'] == 'rand' ) { $args['orderby'] = 'rand'; } //Set Order to Random
+        elseif ( $fields['mootunes_video_playlist_order'] ) { $args['order'] = $fields['mootunes_video_playlist_order']; } //Otherwise set the order
+        if ( $fields['mootunes_video_playlist_style'] ) $args['style'] = $fields['mootunes_video_playlist_style'];
+        if ($fields['mootunes_video_playlist_hide']) { foreach( $fields['mootunes_video_playlist_hide'] as $hidden ) { $args[$hidden] = false; } }
+        echo wp_playlist_shortcode( $args );
       } );
 }
