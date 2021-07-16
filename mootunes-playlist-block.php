@@ -91,10 +91,6 @@ function moo_register_playlist_block() {
 
 function moo_playlist_block_callback( $fields ) {
     $args = array();
-    var_dump( $fields['hide' ] );
-    var_dump( $fields['style' ] );
-    var_dump( $fields['rand' ] );
-    var_dump( $fields['tracks' ] );
     if( isset( $fields['type'] ) && $fields['type'] === 'preview' && function_exists( 'mootunes_get_previews' ) ) {
         $args['ids'] = mootunes_get_previews( $fields['music_release'] );
     } elseif( $fields['tracks'] ) {
