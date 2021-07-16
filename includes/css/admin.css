@@ -1,0 +1,9 @@
+/*
+    Fix Carbon Field Media Gallery Bullet Points 
+*/
+
+.editor-styles-wrapper ul.cf-media-gallery__list {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left:0;
+}
