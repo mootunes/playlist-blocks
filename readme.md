@@ -1,6 +1,3 @@
-# Simple Playlist Block
-Simple WordPress plugin that adds a "Playlist" block to the Gutenberg editor.
-
 # Playlists Blocks for the Gutenberg Editor
 Simple WordPress plugin that adds a "Playlist" block to the Gutenberg editor. It uses the built in [[playlist] shortcode](https://codex.wordpress.org/Playlist_Shortcode).
 
