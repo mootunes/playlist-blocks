@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Simple Playlist Block
  * Description: WordPress plugin that adds a Gutenberg block for core playlist functionality
- * Version: 1.1
+ * Version: 1.2
  * Author: MooTunes
  * Author URI: https://mootunes.com.au/
  * License: GPLv2
