@@ -120,6 +120,7 @@ function moo_playlist_block_releases( ) {
         'numberposts' => -1
     );
     $releases = get_posts( $args );
+    $options = array();
     if ( $releases ) {
         foreach ( $releases as $release ) {
             $options[$release->ID] = get_the_title( $release->ID );
