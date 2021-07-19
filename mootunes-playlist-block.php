@@ -18,15 +18,24 @@ add_action( 'after_setup_theme', 'moo_playlist_load_carbon_fields' );
 add_action( 'carbon_fields_register_fields', 'moo_register_playlist_block');
 add_action( 'admin_enqueue_scripts', 'moo_playlist_load_css' );
 
+/**
+ * Loads Carbon Fields
+ */
 function moo_playlist_load_carbon_fields() {
     require_once( 'vendor/autoload.php' );
     \Carbon_Fields\Carbon_Fields::boot();
 }
 
+/**
+ * Loads CSS
+ */
 function moo_playlist_load_css() {
     wp_enqueue_style('admin-styles', plugin_dir_url( __FILE__ ) . '/includes/css/admin.css' );
 }
 
+/**
+ * Registers the block
+ */
 function moo_register_playlist_block() {
     $fields = array(
         Field::make( 'html', 'title' )
@@ -89,7 +98,19 @@ function moo_register_playlist_block() {
         ->set_render_callback( 'moo_playlist_block_callback' );
 }
 
-function moo_playlist_block_callback( $fields ) {
+/**
+ * Playlist block callback function
+ * Echoes a wp_playlist_shortcode based on fields entered
+ * 
+ * @param array     $fields     The fields, as outputted by Carbon Fields. Accepts the following keys:
+ *                                  - type: if set to 'preview', this will get a music release preview playlist
+ *                                  - music-release: the music release to use
+ *                                  - tracks: an array of Attachment IDs, in the order of playback
+ *                                  - rand: bool - when true, the order will be randomized
+ *                                  - style: light or dark
+ *                                  - hide: an array of elements to hide: accepts tracklist, tracknumbers, images and artists
+ */
+function moo_playlist_block_callback( array $fields ) {
     $args = array();
     if( isset( $fields['type'] ) && $fields['type'] === 'preview' && function_exists( 'mootunes_get_previews' ) ) {
         $args['ids'] = mootunes_get_previews( $fields['music_release'] );
@@ -113,6 +134,11 @@ function moo_playlist_block_callback( $fields ) {
     echo wp_playlist_shortcode( $args );
 }
 
+/**
+ * Returns an array of music releases for users to select
+ * 
+ * @return array    An array of Music Releases, in the format 'Post ID' => 'Post Title'
+ */
 function moo_playlist_block_releases( ) {
     $args = array(
         'post_type' => 'mootunes_album',
