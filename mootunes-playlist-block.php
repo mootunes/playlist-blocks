@@ -121,6 +121,8 @@ class MooTunesPlayListBlock {
      * Registers the block
      */
     public function register_block() {
+        global $pagenow;
+        if( $pagenow == 'widgets.php' ) return;
         $fields = $this->register_fields();
         Block::make( 'playlist', __( 'Playlist', 'moo-playlist' ) )
             ->set_mode( 'edit' )
