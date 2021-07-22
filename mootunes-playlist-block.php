@@ -100,7 +100,7 @@ class MooTunesPlayListBlock {
     }
 
     /**
-     * Returns an array of music releases for users to select
+     * Returns an array of music releases for users to select!!!!!!!!!
      * 
      * @return array    An array of Music Releases, in the format 'Post ID' => 'Post Title'
      */
