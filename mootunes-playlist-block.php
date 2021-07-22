@@ -16,6 +16,9 @@ use Carbon_Fields\Block;
 
 class MooTunesPlayListBlock {
 
+    /**
+     * Initializes actions
+     */
     public function __construct() {
         add_action( 'after_setup_theme', array( $this, 'load_carbon_fields' ) );
         add_action( 'carbon_fields_register_fields', array( $this, 'register_block' ) );
