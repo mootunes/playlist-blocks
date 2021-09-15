@@ -146,8 +146,9 @@ class MooTunesPlayListBlock {
      */
     public function callback( array $fields ) {
         $args = array();
-        if( isset( $fields['type'] ) && $fields['type'] === 'preview' && function_exists( 'mootunes_get_previews' ) ) {
-            $args['ids'] = mootunes_get_previews( $fields['music_release'] );
+        if( isset( $fields['type'] ) && $fields['type'] === 'preview' && class_exists( 'MooRelease' ) ) {
+            global $MooRelease;
+            $args['ids'] = $MooRelease->get_previews( $fields['music_release'] );
         } elseif( $fields['tracks'] ) {
             $args['ids'] = $fields['tracks'];
             if( isset( $fields[ 'tracks' ][0] ) && strpos( get_post_mime_type( $fields[ 'tracks' ][0] ), 'video' ) !== false ) {
